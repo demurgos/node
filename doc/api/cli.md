@@ -66,7 +66,11 @@ If this flag is passed, the behavior can still be set to not abort through
 
 ### `--completion-bash`
 <!-- YAML
+<<<<<<< HEAD
 added: v10.12.0
+=======
+added: v11.0.0
+>>>>>>> 2018-10-23, Version 11.0.0 (Current)
 -->
 
 Print source-able bash completion script for Node.js.
