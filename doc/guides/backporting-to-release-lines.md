@@ -79,7 +79,8 @@ hint: and commit the result with 'git commit'
       Example: `[v8.x backport] process: improve performance of nextTick`
    1. Check the checkbox labeled "Allow edits from maintainers".
    1. In the description add a reference to the original PR.
-   1. Ammend the commit message and include a `Backport-PR-URL:` metadata.
+   1. Ammend the commit message and include a `Backport-PR-URL:` metadata and
+      re-push the change to your fork.
    1. Run a [`node-test-pull-request`][] CI job (with `REBASE_ONTO` set to the
       default `<pr base branch>`)
 10. If during the review process conflicts arise, use the following to rebase:
