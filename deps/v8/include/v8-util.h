@@ -29,9 +29,8 @@ enum PersistentContainerCallbackType {
   kWeak = kWeakWithParameter  // For backwards compatibility.  Deprecate.
 };
 
-
 /**
- * A default trait implemenation for PersistentValueMap which uses std::map
+ * A default trait implementation for PersistentValueMap which uses std::map
  * as a backing map.
  *
  * Users will have to implement their own weak callbacks & dispose traits.
@@ -94,11 +93,11 @@ class DefaultPersistentValueMapTraits : public StdMapTraits<K, V> {
 
   static WeakCallbackDataType* WeakCallbackParameter(
       MapType* map, const K& key, Local<V> value) {
-    return NULL;
+    return nullptr;
   }
   static MapType* MapFromWeakCallbackInfo(
       const WeakCallbackInfo<WeakCallbackDataType>& data) {
-    return NULL;
+    return nullptr;
   }
   static K KeyFromWeakCallbackInfo(
       const WeakCallbackInfo<WeakCallbackDataType>& data) {
@@ -203,7 +202,7 @@ class PersistentValueMapBase {
   void RegisterExternallyReferencedObject(K& key) {
     assert(Contains(key));
     V8::RegisterExternallyReferencedObject(
-        reinterpret_cast<internal::Object**>(FromVal(Traits::Get(&impl_, key))),
+        reinterpret_cast<internal::Address*>(FromVal(Traits::Get(&impl_, key))),
         reinterpret_cast<internal::Isolate*>(GetIsolate()));
   }
 
@@ -302,7 +301,7 @@ class PersistentValueMapBase {
 
   static PersistentContainerValue ClearAndLeak(Global<V>* persistent) {
     V* v = persistent->val_;
-    persistent->val_ = 0;
+    persistent->val_ = nullptr;
     return reinterpret_cast<PersistentContainerValue>(v);
   }
 
@@ -340,7 +339,7 @@ class PersistentValueMapBase {
     bool hasValue = value != kPersistentContainerNotFound;
     if (hasValue) {
       returnValue->SetInternal(
-          *reinterpret_cast<internal::Object**>(FromVal(value)));
+          *reinterpret_cast<internal::Address*>(FromVal(value)));
     }
     return hasValue;
   }
@@ -633,7 +632,7 @@ class PersistentValueVector {
  private:
   static PersistentContainerValue ClearAndLeak(Global<V>* persistent) {
     V* v = persistent->val_;
-    persistent->val_ = 0;
+    persistent->val_ = nullptr;
     return reinterpret_cast<PersistentContainerValue>(v);
   }
 
